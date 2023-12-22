@@ -58,10 +58,10 @@ def main():
     params = ConfigBox(yaml.load(open("params.yaml", encoding="utf-8"), Loader=SafeLoader))
     eval_path = params.evaluate.eval_path
     # Load data
-    X_train = pd.read_csv('data/X_train.csv')
-    y_train = pd.read_csv('data/y_train.csv').iloc[:, 0].to_numpy()
-    X_test = pd.read_csv('data/X_test.csv')
-    y_test = pd.read_csv('data/y_test.csv').iloc[:, 0].to_numpy()
+    X_train = pd.read_csv('data/prepared/X_train.csv')
+    y_train = pd.read_csv('data/prepared/y_train.csv').iloc[:, 0].to_numpy()
+    X_test = pd.read_csv('data/prepared/X_test.csv')
+    y_test = pd.read_csv('data/prepared/y_test.csv').iloc[:, 0].to_numpy()
 
     # Load models
     model_files = [f for f in os.listdir('models') if f.endswith('.joblib')]

@@ -14,10 +14,10 @@ multi_class = params.logistic_regression.multi_class
 solver = params.logistic_regression.solver
 l1_ratio = params.logistic_regression.l1_ratio
 
-X_train = pd.read_csv('data/X_train.csv')
-y_train = pd.read_csv('data/y_train.csv').iloc[:, 0]
-X_test = pd.read_csv('data/X_test.csv')
-y_test = pd.read_csv('data/y_test.csv').iloc[:, 0]
+X_train = pd.read_csv('data/prepared/X_train.csv')
+y_train = pd.read_csv('data/prepared/y_train.csv').iloc[:, 0]
+X_test = pd.read_csv('data/prepared/X_test.csv')
+y_test = pd.read_csv('data/prepared/y_test.csv').iloc[:, 0]
 
 model = LogisticRegression(penalty=penalty, C=C, solver=solver,
                            multi_class=multi_class,

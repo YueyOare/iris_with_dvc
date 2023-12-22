@@ -1,0 +1,61 @@
+stages:
+  prepare:
+    cmd: python prepare.py
+    deps:
+      - prepare.py
+      - data/iris.csv
+    params:
+      - prepare.data_path
+      - prepare.test_size
+    outs:
+      - data/prepared/X_train.csv
+      - data/prepared/y_train.csv
+      - data/prepared/X_test.csv
+      - data/prepared/y_test.csv
+  logistic_regression:
+    cmd: python logistic_regression.py
+    deps:
+      - logistic_regression.py
+      - data/prepared
+    params:
+      - logistic_regression.penalty
+      - logistic_regression.c
+      - logistic_regression.l1_ratio
+      - logistic_regression.solver
+      - logistic_regression.multi_class
+    outs:
+      - models/logreg_model.joblib
+  random_forest:
+    cmd: python random_forest.py
+    deps:
+      - random_forest.py
+      - data/prepared
+    params:
+      - random_forest.n_estimators
+      - random_forest.max_depth
+      - random_forest.min_samples_split
+      - random_forest.criterion
+    outs:
+      - models/randforest_model.joblib
+  evaluate:
+    cmd: python evaluate.py
+    deps:
+      - evaluate.py
+      - data/prepared
+      - models
+    params:
+      - evaluate.eval_path
+    outs:
+      - eval
+metrics:
+  - eval/metrics.json
+plots:
+  - Confusion-Matrix:
+      template: confusion
+      x: actual
+      y:
+        eval/plots/sklearn/cm/logreg_model_train.json: predicted
+        eval/plots/sklearn/cm/logreg_model_test.json: predicted
+        eval/plots/sklearn/cm/randforest_model_train.json: predicted
+        eval/plots/sklearn/cm/randforest_model_test.json: predicted
+  - eval/plots/images/importance_randforest_model.png
