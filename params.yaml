@@ -1,16 +1,16 @@
 prepare:
     data_path: data/iris.csv
-    test_size: 0.2
+    test_size: 0.3
     
 logistic_regression:
     penalty: elasticnet
-    c: 1.0
+    c: 0.5
     l1_ratio: 0.5
     solver: saga
     multi_class: multinomial
     
 random_forest:
-    n_estimators: 20
+    n_estimators: 10
     max_depth: 3
     min_samples_split: 2
     criterion: gini

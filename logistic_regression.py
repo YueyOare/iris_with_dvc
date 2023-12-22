@@ -21,7 +21,8 @@ y_test = pd.read_csv('data/prepared/y_test.csv').iloc[:, 0]
 
 model = LogisticRegression(penalty=penalty, C=C, solver=solver,
                            multi_class=multi_class,
-                           l1_ratio=l1_ratio, n_jobs=-1)
+                           l1_ratio=l1_ratio, n_jobs=-1,
+                           random_state=42)
 model.fit(X_train, y_train)
 print(f'Accuracy: {model.score(X_test, y_test)}')
 
