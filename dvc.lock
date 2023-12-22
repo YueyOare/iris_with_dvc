@@ -18,90 +18,90 @@ stages:
     outs:
     - path: data/prepared/X_test.csv
       hash: md5
-      md5: 7f438198a2a525c016b7b0a8a2be783f
-      size: 2426
+      md5: 51e4280f883f51546e7644c4b1da9611
+      size: 2435
     - path: data/prepared/X_train.csv
       hash: md5
-      md5: da6d67ea57357588ebd461cf987f9d98
-      size: 9564
+      md5: 62de49ed7d4da4354df813af3f96d0a1
+      size: 9610
     - path: data/prepared/y_test.csv
       hash: md5
-      md5: d8abd98d5c7fb59d06ebd848bc55fcd4
-      size: 319
+      md5: 13bd6015e36e47c4647d30439f7e1222
+      size: 318
     - path: data/prepared/y_train.csv
       hash: md5
-      md5: 898c64c474bbc325b0083fa86b4a2f54
-      size: 1249
+      md5: 0b2291231240e15988130749f5ee14a6
+      size: 1250
   logistic_regression:
     cmd: python logistic_regression.py
     deps:
     - path: data/prepared
       hash: md5
-      md5: 866936bf74d221ea2b39f730d3a7e9ad.dir
-      size: 13612
+      md5: b96badc5da03b471bf835f3d8a9bd426.dir
+      size: 13667
       nfiles: 5
     - path: logistic_regression.py
       hash: md5
-      md5: d4e369d0cd11a29a7ea3b43d60606760
-      size: 1034
+      md5: 38da30ba14637e06bfb73645c705236b
+      size: 1028
     params:
       params.yaml:
         logistic_regression.c: 1.0
-        logistic_regression.l1_ratio: 0.5
+        logistic_regression.l1_ratio: 0.0
         logistic_regression.multi_class: multinomial
-        logistic_regression.penalty: elasticnet
-        logistic_regression.solver: saga
+        logistic_regression.penalty: l2
+        logistic_regression.solver: newton-cg
     outs:
-    - path: models/logreg_model.joblib
+    - path: models/logreg.joblib
       hash: md5
-      md5: 861d37433fe881637cbfcfdc6091be1c
+      md5: 5c80bbd448c1886800300301eddc02b9
       size: 1535
   random_forest:
     cmd: python random_forest.py
     deps:
     - path: data/prepared
       hash: md5
-      md5: 866936bf74d221ea2b39f730d3a7e9ad.dir
-      size: 13612
+      md5: b96badc5da03b471bf835f3d8a9bd426.dir
+      size: 13667
       nfiles: 5
     - path: random_forest.py
       hash: md5
-      md5: 66978879c130e4eecdddefe4532e58db
-      size: 1049
+      md5: 85900a36417509097561ae8316b4e158
+      size: 1043
     params:
       params.yaml:
-        random_forest.criterion: gini
-        random_forest.max_depth: 3
+        random_forest.criterion: entropy
+        random_forest.max_depth: 5
         random_forest.min_samples_split: 2
-        random_forest.n_estimators: 10
+        random_forest.n_estimators: 20
     outs:
-    - path: models/randforest_model.joblib
+    - path: models/randforest.joblib
       hash: md5
-      md5: e17399773fc2d3175fbcc963f7325556
-      size: 13617
+      md5: 9dfa8b93fbef6b850e0448c242081859
+      size: 33009
   evaluate:
     cmd: python evaluate.py
     deps:
     - path: data/prepared
       hash: md5
-      md5: 866936bf74d221ea2b39f730d3a7e9ad.dir
-      size: 13612
+      md5: b96badc5da03b471bf835f3d8a9bd426.dir
+      size: 13667
       nfiles: 5
     - path: evaluate.py
       hash: md5
-      md5: ac6198207845b4bd2ebbc5877a059b7a
-      size: 3167
+      md5: 5d37e65f6e1a91d4bd824715904f4d51
+      size: 3034
     - path: models
       hash: md5
-      md5: e732658d78fa1bfa20af900dc056dd25.dir
-      size: 15200
-      nfiles: 3
+      md5: 0b71af7d7c59b28090560833124703f9.dir
+      size: 49780
+      nfiles: 5
     params:
       params.yaml:
         evaluate.eval_path: eval
     outs:
     - path: eval
       hash: md5
-      md5: 26cbc6f102c34b7ef27a70ac126c680b.dir
-      size: 40183
-      nfiles: 6
+      md5: 0d5894363f35fe5ca4b24f4ce489d8cd.dir
+      size: 79148
+      nfiles: 11
