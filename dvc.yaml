@@ -24,7 +24,7 @@ stages:
       - logistic_regression.solver
       - logistic_regression.multi_class
     outs:
-      - models/logreg_model.joblib
+      - models/logreg.joblib
   random_forest:
     cmd: python random_forest.py
     deps:
@@ -36,7 +36,7 @@ stages:
       - random_forest.min_samples_split
       - random_forest.criterion
     outs:
-      - models/randforest_model.joblib
+      - models/randforest.joblib
   evaluate:
     cmd: python evaluate.py
     deps:
@@ -54,8 +54,8 @@ plots:
       template: confusion
       x: actual
       y:
-        eval/plots/sklearn/cm/logreg_model_train.json: predicted
-        eval/plots/sklearn/cm/logreg_model_test.json: predicted
-        eval/plots/sklearn/cm/randforest_model_train.json: predicted
-        eval/plots/sklearn/cm/randforest_model_test.json: predicted
+        eval/plots/sklearn/cm/logreg_train.json: predicted
+        eval/plots/sklearn/cm/logreg_test.json: predicted
+        eval/plots/sklearn/cm/randforest_train.json: predicted
+        eval/plots/sklearn/cm/randforest_test.json: predicted
   - eval/plots/images/importance_randforest_model.png

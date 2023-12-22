@@ -25,4 +25,4 @@ model = RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth,
 model.fit(X_train, y_train)
 print(f'Accuracy: {model.score(X_test, y_test)}')
 
-joblib.dump(model, 'models/randforest_model.joblib')
+joblib.dump(model, 'models/randforest.joblib')

@@ -23,13 +23,11 @@ def evaluate(model, X, y, split, model_name, live, save_path):
     avg_prec = sum(avg_prec_scores) / len(avg_prec_scores)
 
     roc_auc = metrics.roc_auc_score(y_binarized, predictions_by_class, average='macro')
-    if not live.summary:
-        live.summary = {"model_scores": {}}
-    if model_name not in live.summary["model_scores"]:
-        live.summary["model_scores"][model_name] = {"avg_prec": {}, "roc_auc": {}}
+    if model_name not in live.summary:
+        live.summary[model_name] = {"avg_prec": {}, "roc_auc": {}}
 
-    live.summary["model_scores"][model_name]["avg_prec"][split] = avg_prec
-    live.summary["model_scores"][model_name]["roc_auc"][split] = roc_auc
+    live.summary[model_name]["avg_prec"][split] = avg_prec
+    live.summary[model_name]["roc_auc"][split] = roc_auc
 
     live.log_sklearn_plot(
         "confusion_matrix",

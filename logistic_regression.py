@@ -25,4 +25,4 @@ model = LogisticRegression(penalty=penalty, C=C, solver=solver,
 model.fit(X_train, y_train)
 print(f'Accuracy: {model.score(X_test, y_test)}')
 
-joblib.dump(model, 'models/logreg_model.joblib')
+joblib.dump(model, 'models/logreg.joblib')
